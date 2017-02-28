@@ -17,12 +17,6 @@ public class Contato {
     private String emailContato;
     private String dataNascimento;
 
-    public Contato(int idContato, String nomeContato, String emailContato, String dataNascimento) {
-        this.idContato = idContato;
-        this.nomeContato = nomeContato;
-        this.emailContato = emailContato;
-        this.dataNascimento = dataNascimento;
-    }
 
     public int getIdContato() {
         return idContato;
