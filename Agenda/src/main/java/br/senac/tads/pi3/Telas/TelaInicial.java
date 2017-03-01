@@ -53,7 +53,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setBackground(new java.awt.Color(220, 220, 220));
 
         jDesktop.setBackground(new java.awt.Color(153, 153, 153));
-        jDesktop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jDesktop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agenda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jLabelNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelNome.setForeground(new java.awt.Color(255, 255, 255));

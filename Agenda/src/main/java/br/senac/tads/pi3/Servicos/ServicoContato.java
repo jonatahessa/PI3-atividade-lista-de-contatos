@@ -5,6 +5,10 @@
  */
 package br.senac.tads.pi3.Servicos;
 
+import br.senac.tads.pi3.Daos.DaoContato;
+import br.senac.tads.pi3.Exceptions.AgendaException;
+import br.senac.tads.pi3.Exceptions.DataSourceException;
+
 /**
  *
  * @author jonat
@@ -34,7 +38,7 @@ public class ServicoContato {
         }
         return verificarDataNascimento;
     }
-    
+
     public boolean verificarTelefoneContato(String telefoneContato) {
         boolean verificarTelefoneContato = true;
         if (telefoneContato == null || telefoneContato.equals("    -    ")) {
@@ -43,4 +47,16 @@ public class ServicoContato {
         return verificarTelefoneContato;
     }
 
+    public static void removerContato(int id)
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a exclusão da despesa informada
+            DaoContato.deletar(id);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
 }
