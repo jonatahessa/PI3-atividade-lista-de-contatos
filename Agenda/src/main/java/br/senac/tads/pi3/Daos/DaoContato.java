@@ -4,7 +4,11 @@ import br.senac.tads.pi3.agenda.Contato;
 import br.senac.tads.pi3.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DaoContato {
     public static void inserir(Contato contato)
@@ -130,4 +134,62 @@ public class DaoContato {
             }
         }
     } 
+    
+         //Pesquisa um contato na tabela "contato" do banco de dados
+     public static List<Contato> pesquisar(String palavra)
+            throws SQLException, Exception {
+
+        //Monta a string de pesquisa de um contato no BD,
+        //utilizando os dados do contato passados como parâmetro
+        String sql = "SELECT * FROM Contato " +
+                     " WHERE Contato.NomeContato LIKE ? AND Contato.ContatoEnabled = 'true';";
+           
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement statement = null;
+        
+        List <Contato> listaContatos = new LinkedList<>();
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = Conexao.getConnection();
+            //Cria um statement para execução de instruções SQL
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, "%" + palavra + "%");
+            
+            //Exibe no console o que será executado no banco de dados
+            System.out.println("Executando COMANDO SQL: " + sql);
+            
+            ResultSet result = statement.executeQuery();
+            //Itera por cada item do resultado
+            while (result.next()) {
+                //Se a lista não foi inicializada, a inicializa
+                if (listaContatos == null) {
+                    listaContatos = new ArrayList<Contato>();
+                }
+                //Cria uma instância de Contatos e popula com os valores do BD
+                Contato contato = new Contato();
+                contato.setIdContato(result.getInt("IdContato"));
+                contato.setNomeContato(result.getString("NomeContato"));
+                contato.setTelefoneContato(result.getString("TelefoneContato"));
+                contato.setEmailContato(result.getString("EmailContato"));
+                contato.setDataNascimento(result.getString("DataNascimento"));
+
+                //Adiciona a instância na lista
+                listaContatos.add(contato);
+            }
+        } finally {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (statement != null && !statement.isClosed()) {
+                statement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        return listaContatos;
+    }  
 }
