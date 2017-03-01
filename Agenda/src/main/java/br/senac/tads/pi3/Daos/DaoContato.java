@@ -1,6 +1,6 @@
 package br.senac.tads.pi3.Daos;
 
-import br.senac.tads.pi3.agenda.Contato;
+import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

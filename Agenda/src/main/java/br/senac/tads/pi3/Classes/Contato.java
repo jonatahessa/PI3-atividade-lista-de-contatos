@@ -1,6 +1,10 @@
+package br.senac.tads.pi3.Classes;
 
-package br.senac.tads.pi3.Agenda;
 
+/**
+ *
+ * @author jonat
+ */
 public class Contato {
 
     private int idContato;

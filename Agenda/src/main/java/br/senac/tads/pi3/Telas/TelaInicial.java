@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.Agenda;
+package br.senac.tads.pi3.Telas;
 
+import br.senac.tads.pi3.Servicos.ServicoContato;
+import br.senac.tads.pi3.Classes.Contato;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
