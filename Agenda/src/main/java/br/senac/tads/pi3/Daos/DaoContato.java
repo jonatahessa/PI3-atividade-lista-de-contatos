@@ -136,13 +136,13 @@ public class DaoContato {
     } 
     
          //Pesquisa um contato na tabela "contato" do banco de dados
-     public static List<Contato> pesquisar(String palavra)
+     public static List<Contato> pesquisar(int id)
             throws SQLException, Exception {
 
         //Monta a string de pesquisa de um contato no BD,
         //utilizando os dados do contato passados como parâmetro
         String sql = "SELECT * FROM Contato " +
-                     " WHERE Contato.NomeContato LIKE ? AND Contato.ContatoEnabled = 'true';";
+                     " WHERE Contato.IdContato = ? AND Contato.ContatoEnabled = 'true';";
            
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -157,7 +157,7 @@ public class DaoContato {
             //Cria um statement para execução de instruções SQL
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, "%" + palavra + "%");
+            statement.setInt(1, id);
             
             //Exibe no console o que será executado no banco de dados
             System.out.println("Executando COMANDO SQL: " + sql);
