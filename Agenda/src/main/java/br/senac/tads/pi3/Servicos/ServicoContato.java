@@ -5,9 +5,11 @@
  */
 package br.senac.tads.pi3.Servicos;
 
+import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.Daos.DaoContato;
 import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
+import java.util.List;
 
 /**
  *
@@ -52,6 +54,45 @@ public class ServicoContato {
         try {
             //Solicita ao DAO a exclusão da despesa informada
             DaoContato.deletar(id);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+    public static void adicionarContato(Contato contato)
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a inserção da despesa informada
+            DaoContato.inserir(contato);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+    public static void alterarContato(Contato contato, int id)
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a alteração da despesa informada
+            DaoContato.alterar(contato, id);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+    public static List<Contato> procurarContato(int id)
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a alteração da despesa informada
+            return DaoContato.pesquisar(id);
         } catch (Exception e) {
             //Imprime qualquer erro técnico no console e devolve
             //uma exceção e uma mensagem amigável a camada de visão

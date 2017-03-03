@@ -7,8 +7,14 @@ package br.senac.tads.pi3.Telas;
 
 import br.senac.tads.pi3.Servicos.ServicoContato;
 import br.senac.tads.pi3.Classes.Contato;
+import br.senac.tads.pi3.Exceptions.AgendaException;
+import br.senac.tads.pi3.Exceptions.DataSourceException;
+import static br.senac.tads.pi3.Telas.TelaPesquisar.alterou;
+import static br.senac.tads.pi3.Telas.TelaPesquisar.idContato;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -19,7 +25,8 @@ import javax.swing.JOptionPane;
 public class TelaInicial extends javax.swing.JFrame {
 
     TelaPesquisar telaPesquisar = null; 
-
+    
+    
     /**
      * Creates new form NewJFrame
      */
@@ -253,13 +260,34 @@ public class TelaInicial extends javax.swing.JFrame {
             jFormattedTextFieldTelefone.setBackground(Color.WHITE);
         }
         if (erro == 0) {
-            JOptionPane.showMessageDialog(this, "Contato Adicionado!");
+            if (alterou == 0) {
+                try {
+                    servicoContato.adicionarContato(contato);
+                } catch (AgendaException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
+                } catch (DataSourceException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                JOptionPane.showMessageDialog(this, "Contato Adicionado!");
+            
+            } else {
+                try {
+                    servicoContato.alterarContato(contato, idContato);
+                } catch (AgendaException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
+                } catch (DataSourceException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+                JOptionPane.showMessageDialog(this, "Contato Alterado!");
+            }
+            jTextFieldNome.setText("");
+            jTextFieldEmail.setText("");
+            jFormattedTextFieldDataDeNascimento.setText("");
+            jFormattedTextFieldTelefone.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Verficique os campos destacados", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-        
-        jTextFieldNome.setText("");
-        jTextFieldEmail.setText("");
-        jFormattedTextFieldDataDeNascimento.setText("");
-        jFormattedTextFieldTelefone.setText("");
+       
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -328,14 +356,14 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JDesktopPane jDesktop;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataDeNascimento;
-    private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
+    public javax.swing.JFormattedTextField jFormattedTextFieldDataDeNascimento;
+    public javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabelDataDeNascimento;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelTelefone;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldNome;
+    public javax.swing.JTextField jTextFieldEmail;
+    public javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 
 }

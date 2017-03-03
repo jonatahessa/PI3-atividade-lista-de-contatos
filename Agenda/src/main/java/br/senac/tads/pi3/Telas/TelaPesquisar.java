@@ -5,7 +5,9 @@
  */
 package br.senac.tads.pi3.Telas;
 
+import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.Servicos.ServicoContato;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +23,10 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    TelaInicial telaPesquisar = new TelaInicial();
+    public static int alterou = 0;
+    public static int idContato = 0;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,7 +133,42 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        try {
+
+            final int row = jTableAgenda.getSelectedRow();
+
+            if (row >= 0) {
+
+                Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
+                List<Contato> resultado = ServicoContato.procurarContato(id);
+                
+                for (Contato contato : resultado) {
+                    if (contato.getIdContato() == id){                      
+                        telaPesquisar.validate();
+                        telaPesquisar.repaint();
+                        telaPesquisar = new TelaInicial();
+                        telaPesquisar.jTextFieldNome.setText(contato.getNomeContato());
+                        telaPesquisar.jTextFieldEmail.setText(contato.getEmailContato());
+                        telaPesquisar.jFormattedTextFieldTelefone.setText(contato.getTelefoneContato());
+                        telaPesquisar.jFormattedTextFieldDataDeNascimento.setText(contato.getDataNascimento());
+                        idContato = contato.getIdContato();
+                        alterou++;
+                        this.getParent().add(telaPesquisar);              
+                        telaPesquisar.toFront();
+                        telaPesquisar.setVisible(true);
+                        break;
+                   }
+                }
+            }
+        } catch (Exception e) {
+            //Se ocorrer algum erro técnico, mostra-o no console,
+            //mas esconde-o do usuário
+            e.printStackTrace();
+            //Exibe uma mensagem de erro genérica ao usuário
+            JOptionPane.showMessageDialog(rootPane, "Não é possível "
+                + "exibir os detalhes deste contato.",
+                "Erro ao abrir detalhe", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
