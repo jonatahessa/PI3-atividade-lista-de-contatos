@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class ServicoContato {
 
+
     public boolean verificarNomeContato(String nomeContato) {
         boolean verificarNomeContato = true;
         if (nomeContato == null || nomeContato.equals("")) {
@@ -88,11 +89,11 @@ public class ServicoContato {
         }
     }
     
-    public static List<Contato> obterContato(int id)
+    public static Contato obterContato(int id)
             throws AgendaException, DataSourceException {
         try {
-            //Solicita ao DAO a alteração da despesa informada
-            return DaoContato.obterContato(id);
+            //Retorna o produto obtido com o DAO
+            return DaoContato.obter(id);
         } catch (Exception e) {
             //Imprime qualquer erro técnico no console e devolve
             //uma exceção e uma mensagem amigável a camada de visão

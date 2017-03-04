@@ -1,5 +1,6 @@
 package br.senac.tads.pi3.Classes;
 
+import java.sql.Date;
 
 /**
  *
@@ -12,7 +13,7 @@ public class Contato {
     private String telefoneContato;
     private String emailContato;
     private String dataNascimento;
-
+    private String adicionadoEm;
 
     public int getIdContato() {
         return idContato;
@@ -52,6 +53,14 @@ public class Contato {
 
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getAdicionadoEm() {
+        return adicionadoEm;
+    }
+
+    public void setAdicionadoEm(String adicionadoEm) {
+        this.adicionadoEm = adicionadoEm;
     }
 
 }

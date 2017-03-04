@@ -58,6 +58,9 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -83,16 +86,6 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jFormattedTextFieldDataDeNascimento" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabelDataDeNascimento" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jFormattedTextFieldTelefone" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="88" pref="549" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jButtonPesquisar" min="-2" max="-2" attributes="0"/>
@@ -102,6 +95,16 @@
                               <Component id="jButtonSair" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jFormattedTextFieldDataDeNascimento" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabelDataDeNascimento" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jFormattedTextFieldTelefone" min="-2" pref="122" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="95" pref="552" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

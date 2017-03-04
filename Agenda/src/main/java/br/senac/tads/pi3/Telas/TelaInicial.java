@@ -9,10 +9,11 @@ import br.senac.tads.pi3.Servicos.ServicoContato;
 import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
-import static br.senac.tads.pi3.Telas.TelaPesquisar.alterou;
-import static br.senac.tads.pi3.Telas.TelaPesquisar.idContato;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -150,13 +151,6 @@ public class TelaInicial extends javax.swing.JFrame {
                             .addComponent(jLabelTelefone)
                             .addComponent(jLabelEmail))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jDesktopLayout.createSequentialGroup()
-                        .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jFormattedTextFieldDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(88, 549, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonPesquisar)
@@ -164,7 +158,14 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jDesktopLayout.createSequentialGroup()
+                        .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jFormattedTextFieldDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(95, 552, Short.MAX_VALUE))))
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,6 +217,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         int erro = 0;
+        LocalDateTime now = LocalDateTime.now();
 
         Contato contato = new Contato();
 
@@ -223,6 +225,7 @@ public class TelaInicial extends javax.swing.JFrame {
         contato.setEmailContato(jTextFieldEmail.getText());
         contato.setDataNascimento(jFormattedTextFieldDataDeNascimento.getText());
         contato.setTelefoneContato(jFormattedTextFieldTelefone.getText());
+        contato.setAdicionadoEm(now.toString());
 
         ServicoContato servicoContato = new ServicoContato();
 
@@ -260,25 +263,12 @@ public class TelaInicial extends javax.swing.JFrame {
             jFormattedTextFieldTelefone.setBackground(Color.WHITE);
         }
         if (erro == 0) {
-            if (alterou == 0) {
-                try {
-                    servicoContato.adicionarContato(contato);
-                } catch (AgendaException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
-                } catch (DataSourceException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
-                JOptionPane.showMessageDialog(this, "Contato Adicionado!");
-            
-            } else {
-                try {
-                    servicoContato.alterarContato(contato, idContato);
-                } catch (AgendaException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao alterar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
-                } catch (DataSourceException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao alterar cliente no Banco de Dados", "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
-                JOptionPane.showMessageDialog(this, "Contato Alterado!");
+            try {
+                ServicoContato.adicionarContato(contato);
+            } catch (AgendaException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataSourceException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
             jTextFieldNome.setText("");
             jTextFieldEmail.setText("");
@@ -355,9 +345,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JDesktopPane jDesktop;
+    public javax.swing.JDesktopPane jDesktop;
     public javax.swing.JFormattedTextField jFormattedTextFieldDataDeNascimento;
-    public javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabelDataDeNascimento;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelNome;
