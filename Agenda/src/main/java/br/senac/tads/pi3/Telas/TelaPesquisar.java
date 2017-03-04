@@ -6,9 +6,14 @@
 package br.senac.tads.pi3.Telas;
 
 import br.senac.tads.pi3.Classes.Contato;
+import br.senac.tads.pi3.Exceptions.AgendaException;
+import br.senac.tads.pi3.Exceptions.DataSourceException;
 import br.senac.tads.pi3.Servicos.ServicoContato;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,6 +46,8 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         jButtonRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAgenda = new javax.swing.JTable();
+        textPesquisa = new javax.swing.JTextField();
+        ButtonPesquisar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -95,6 +102,19 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTableAgenda);
 
+        textPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textPesquisaActionPerformed(evt);
+            }
+        });
+
+        ButtonPesquisar.setText("Pesquisar");
+        ButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonPesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,16 +128,27 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
                     .addComponent(jButtonRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonPesquisar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonPesquisar))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRemover)
                     .addComponent(jButtonEditar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jButtonFechar)
                 .addContainerGap())
         );
@@ -133,6 +164,10 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        if (jTableAgenda.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um contato para editá-lo", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+        
         try {
 
             final int row = jTableAgenda.getSelectedRow();
@@ -140,7 +175,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
             if (row >= 0) {
 
                 Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
-                List<Contato> resultado = ServicoContato.procurarContato(id);
+                List<Contato> resultado = ServicoContato.obterContato(id);
                 
                 for (Contato contato : resultado) {
                     if (contato.getIdContato() == id){                      
@@ -169,6 +204,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
                 + "exibir os detalhes deste contato.",
                 "Erro ao abrir detalhe", JOptionPane.ERROR_MESSAGE);
         }
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
@@ -176,7 +212,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
             final int row = jTableAgenda.getSelectedRow();
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, "Deseja realmente remover "
-                    + jTableAgenda.getValueAt(row, 1) + "?");
+                + jTableAgenda.getValueAt(row, 1) + "?");
             if (dialogResult == 0) {
                 if (row >= 0) {
                     Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
@@ -187,14 +223,94 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Selecione o contato a ser removido!", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jButtonRemoverActionPerformed
+
+    private void textPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPesquisaActionPerformed
+
+    private void ButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarActionPerformed
+        List<Contato> resultado = null;
+        
+        //Retornar todos os Contatos
+        if (textPesquisa.getText().toString().equals("")) {
+            try {
+                resultado = ServicoContato.retornarTodos();
+                DefaultTableModel model = (DefaultTableModel) jTableAgenda.getModel();
+                model.setRowCount(0);
+  
+            if (resultado == null || resultado.size() <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "A pesquisa não retornou resultados ",
+                    "Sem resultados", JOptionPane.ERROR_MESSAGE);            
+                return;
+            }
+        
+            int size = resultado.size();        
+        
+            for (int i = 0; i < size; i++){
+                Contato contato = resultado.get(i);
+                if (contato != null) {
+                    Object[] row = new Object[5];
+                    row[0] = contato.getIdContato();
+                    row[1] = contato.getNomeContato();
+                    row[2] = contato.getTelefoneContato();;
+                    row[3] = contato.getEmailContato();
+                    row[4] = contato.getDataNascimento();
+                    model.addRow(row);                
+                }            
+            }             
+        
+            } catch (AgendaException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao pesquisar contato no Banco de Dados!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (DataSourceException ex) {
+                Logger.getLogger(TelaPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        //Retornar os contatos pesquisados    
+        } else {
+            try {
+                resultado = ServicoContato.pesquisarContato(textPesquisa.getText().toString());
+            } catch (AgendaException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao pesquisar contato no Banco de Dados!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (DataSourceException ex) {
+                Logger.getLogger(TelaPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            DefaultTableModel model = (DefaultTableModel) jTableAgenda.getModel();
+            model.setRowCount(0);
+  
+            if (resultado == null || resultado.size() <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "A pesquisa não retornou resultados ",
+                    "Sem resultados", JOptionPane.ERROR_MESSAGE);            
+                return;
+            }
+        
+            int size = resultado.size();        
+        
+            for (int i = 0; i < size; i++){
+                Contato contato = resultado.get(i);
+                if (contato != null) {
+                    Object[] row = new Object[5];
+                    row[0] = contato.getIdContato();
+                    row[1] = contato.getNomeContato();
+                    row[2] = contato.getTelefoneContato();;
+                    row[3] = contato.getEmailContato();
+                    row[4] = contato.getDataNascimento();
+                    model.addRow(row);                
+                }            
+            }             
+        }
+    }//GEN-LAST:event_ButtonPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonPesquisar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAgenda;
+    private javax.swing.JTextField textPesquisa;
     // End of variables declaration//GEN-END:variables
 }

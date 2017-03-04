@@ -88,11 +88,37 @@ public class ServicoContato {
         }
     }
     
-    public static List<Contato> procurarContato(int id)
+    public static List<Contato> obterContato(int id)
             throws AgendaException, DataSourceException {
         try {
             //Solicita ao DAO a alteração da despesa informada
-            return DaoContato.pesquisar(id);
+            return DaoContato.obterContato(id);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+    public static List<Contato> pesquisarContato(String contatoNome)
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a alteração da despesa informada
+            return DaoContato.pesquisarContato(contatoNome);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+    public static List<Contato> retornarTodos()
+            throws AgendaException, DataSourceException {
+        try {
+            //Solicita ao DAO a alteração da despesa informada
+            return DaoContato.retornarTodos();
         } catch (Exception e) {
             //Imprime qualquer erro técnico no console e devolve
             //uma exceção e uma mensagem amigável a camada de visão
