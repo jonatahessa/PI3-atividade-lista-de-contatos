@@ -53,6 +53,8 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         textCelular = new javax.swing.JFormattedTextField();
 
+        setClosable(true);
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(102, 102, 102))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -86,6 +88,11 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(102, 102, 102));
@@ -242,10 +249,12 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         
         if (erro == 0) {
             try {
-                ServicoContato.alterarContato(contato, contatoId);
-                JOptionPane.showMessageDialog(null, "Contato Alterado!");
-                this.dispose();  
-                
+                int dialogResult = JOptionPane.showInternalConfirmDialog(this, "Deseja realmente Alterar este contato?");
+                if (dialogResult == 0) {
+                    ServicoContato.alterarContato(contato, contatoId);
+                    JOptionPane.showMessageDialog(null, "Contato Alterado!");
+                    this.dispose();  
+                }
             } catch (AgendaException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DataSourceException ex) {
@@ -257,6 +266,13 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         }
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int dialogResult = JOptionPane.showInternalConfirmDialog(this, "Deseja realmente cancelar?");
+        if (dialogResult == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
