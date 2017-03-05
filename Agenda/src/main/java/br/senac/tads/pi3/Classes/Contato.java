@@ -11,9 +11,10 @@ public class Contato {
     private int idContato;
     private String nomeContato;
     private String telefoneContato;
+    private String celularContato;
     private String emailContato;
     private String dataNascimento;
-    private String adicionadoEm;
+    private Date adicionadoEm;
 
     public int getIdContato() {
         return idContato;
@@ -38,6 +39,14 @@ public class Contato {
     public void setTelefoneContato(String telefoneContato) {
         this.telefoneContato = telefoneContato;
     }
+    
+    public String getCelularContato() {
+        return celularContato;
+    }
+
+    public void setCelularContato(String CelularContato) {
+        this.celularContato = CelularContato;
+    }
 
     public String getEmailContato() {
         return emailContato;
@@ -55,12 +64,15 @@ public class Contato {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getAdicionadoEm() {
+    public Date getDate() {
         return adicionadoEm;
     }
 
-    public void setAdicionadoEm(String adicionadoEm) {
+    public void setAdicionadoEm(Date adicionadoEm) {
         this.adicionadoEm = adicionadoEm;
     }
 
+    public Date getAdicionadoEm(){
+        return adicionadoEm;
+    }
 }

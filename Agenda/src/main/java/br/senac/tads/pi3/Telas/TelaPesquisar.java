@@ -88,17 +88,17 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
 
         jTableAgenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Telefone", "Data de Nascimento", "E-mail", "Adicionado em:"
+                "ID", "Nome", "Telefone", "Celular", "E-mail", "Data de Nascimento", "Adicionado em:"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,7 +175,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         if (row >= 0) {
             Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
             try {
-                contato = ServicoContato.obterContato(id);
+                List<Contato> resultado = ServicoContato.obterContato(id);
 
             } catch (AgendaException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,18 +200,19 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
         try {
             final int row = jTableAgenda.getSelectedRow();
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            
+            int dialogResult = JOptionPane.showInternalConfirmDialog(this, "Deseja realmente Remover " + jTableAgenda.getValueAt(row, 1).toString()  + "?");
+            if (dialogResult == 0) {
                 if (row >= 0) {
                     Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
+                    
                     ServicoContato.removerContato(id);
                     JOptionPane.showMessageDialog(this, "Contato removido com sucesso!");
                 }
-            
+        } 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Selecione o contato a ser removido!", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-
+        
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jTextPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPesquisaActionPerformed
@@ -239,13 +240,14 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
             for (int i = 0; i < size; i++){
                 Contato contato = resultado.get(i);
                 if (contato != null) {
-                    Object[] row = new Object[6];
+                    Object[] row = new Object[7];
                     row[0] = contato.getIdContato();
                     row[1] = contato.getNomeContato();
                     row[2] = contato.getTelefoneContato();
-                    row[3] = contato.getEmailContato();
-                    row[4] = contato.getDataNascimento();
-                    row[5] = contato.getAdicionadoEm();
+                    row[3] = contato.getCelularContato();
+                    row[4] = contato.getEmailContato();
+                    row[5] = contato.getDataNascimento();
+                    row[6] = contato.getAdicionadoEm();
                     model.addRow(row);                
                 }            
             }             
@@ -280,12 +282,14 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
             for (int i = 0; i < size; i++){
                 Contato contato = resultado.get(i);
                 if (contato != null) {
-                    Object[] row = new Object[6];
+                    Object[] row = new Object[7];
                     row[0] = contato.getIdContato();
                     row[1] = contato.getNomeContato();
-                    row[2] = contato.getTelefoneContato();;
-                    row[3] = contato.getEmailContato();
-                    row[4] = contato.getDataNascimento();
+                    row[2] = contato.getTelefoneContato();
+                    row[3] = contato.getCelularContato();
+                    row[4] = contato.getEmailContato();
+                    row[5] = contato.getDataNascimento();
+                    row[6] = contato.getAdicionadoEm();
                     model.addRow(row);                
                 }            
             }             

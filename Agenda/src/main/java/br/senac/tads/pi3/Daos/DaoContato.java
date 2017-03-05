@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class DaoContato {
             throws SQLException, Exception {
         //Monta a string de inserção de um cliente no BD,
         //utilizando os dados do clientes passados como parâmetro
-        String sql = "INSERT INTO agenda (contatoNome, contatoTelefone, "
-                + "contatoEmail, dataNasc, adicionadoEm, contatoEnabled) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Contato (ContatoNome, ContatoEmail, "
+                + "ContatoTelefone, ContatoCelular, ContatoNascimento, ContatoEnabled, ContatoAdicionadoEm) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP());";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -33,11 +34,12 @@ public class DaoContato {
             statement = connection.prepareStatement(sql);
 
             statement.setString(1, contato.getNomeContato());
-            statement.setString(2, contato.getTelefoneContato());
-            statement.setString(3, contato.getEmailContato());
-            statement.setString(4, contato.getDataNascimento());
-            statement.setString(5, contato.getAdicionadoEm());
+            statement.setString(2, contato.getEmailContato());
+            statement.setString(3, contato.getTelefoneContato());
+            statement.setString(4, contato.getCelularContato());
+            statement.setString(5, contato.getDataNascimento());
             statement.setString(6, "true");
+
 
             //Exibe no console o que será executado no banco de dados
             System.out.println("Executando COMANDO SQL: " + sql);
@@ -60,8 +62,8 @@ public class DaoContato {
             throws SQLException, Exception {
         //Monta a string de remoção de um contato no BD,
         //utilizando os dados do contato passados como parâmetro
-        String sql = "UPDATE agenda SET contatoEnabled = ?"
-                + "WHERE contatoId = ?; ";
+        String sql = "UPDATE Contato SET contatoEnabled = ?"
+                + "WHERE IdContato = ?; ";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -98,11 +100,12 @@ public class DaoContato {
             throws SQLException, Exception {
         //Monta a string de alteracao de um cliente no BD,
         //utilizando os dados do clientes passados como parâmetro
-        String sql = "UPDATE agenda SET contatoNome = ?, "
-                + "contatoTelefone = ?, "
-                + "contatoEmail = ?, "
-                + "dataNasc = ?, "
-                + "WHERE ContatoId = ?;";
+        String sql = "UPDATE Contato SET ContatoNome = ?, "
+                + "ContatoTelefone = ?, "
+                + "ContatoCelular = ?, "
+                + "ContatoEmail = ?, "
+                + "ContatoNascimento = ?, "
+                + "WHERE IdContato = ?;";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -117,9 +120,10 @@ public class DaoContato {
 
             statement.setString(1, contato.getNomeContato());
             statement.setString(2, contato.getTelefoneContato());
-            statement.setString(3, contato.getEmailContato());
-            statement.setString(4, contato.getDataNascimento());
-            statement.setString(5, "" + id);
+            statement.setString(3, contato.getCelularContato());
+            statement.setString(4, contato.getEmailContato());
+            statement.setString(5, contato.getDataNascimento());
+            statement.setString(6, "" + id);
 
             //Exibe no console o que será executado no banco de dados
             System.out.println("Executando COMANDO SQL: " + sql);
@@ -143,8 +147,8 @@ public class DaoContato {
 
         //Monta a string de pesquisa de um contato no BD,
         //utilizando os dados do contato passados como parâmetro
-        String sql = "SELECT * FROM agenda "
-                + " WHERE contatoId = ? AND contatoEnabled = 'true';";
+        String sql = "SELECT * FROM Contato "
+                + " WHERE IdContato = ? AND ContatoEnabled = 'true';";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -174,11 +178,12 @@ public class DaoContato {
                 //Cria uma instância de Contatos e popula com os valores do BD
                 Contato contato = new Contato();
                 contato.setIdContato(result.getInt("IdContato"));
-                contato.setNomeContato(result.getString("NomeContato"));
-                contato.setTelefoneContato(result.getString("TelefoneContato"));
-                contato.setEmailContato(result.getString("EmailContato"));
-                contato.setDataNascimento(result.getString("DataNasc"));
-                contato.setAdicionadoEm(result.getString("adicionadoEm"));
+                contato.setNomeContato(result.getString("ContatoNome"));
+                contato.setTelefoneContato(result.getString("ContatoTelefone"));
+                contato.setCelularContato(result.getString("ContatoCelular"));
+                contato.setEmailContato(result.getString("ContatoEmail"));
+                contato.setDataNascimento(result.getString("ContatoNascimento"));
+                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
 
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
@@ -202,8 +207,8 @@ public class DaoContato {
 
         //Monta a string de pesquisa de um contato no BD,
         //utilizando os dados do contato passados como parâmetro
-        String sql = "SELECT * FROM agenda "
-                + " WHERE contatoId = ? AND contatoEnabled = 'true';";
+        String sql = "SELECT * FROM Contato " +
+                     " WHERE Contato.ContatoNome LIKE ? AND Contato.ContatoEnabled = 'true';";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -218,7 +223,7 @@ public class DaoContato {
             //Cria um statement para execução de instruções SQL
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, contatoNome);
+            statement.setString(1, "%" + contatoNome + "%");
 
             //Exibe no console o que será executado no banco de dados
             System.out.println("Executando COMANDO SQL: " + sql);
@@ -233,11 +238,12 @@ public class DaoContato {
                 //Cria uma instância de Contatos e popula com os valores do BD
                 Contato contato = new Contato();
                 contato.setIdContato(result.getInt("IdContato"));
-                contato.setNomeContato(result.getString("NomeContato"));
-                contato.setTelefoneContato(result.getString("TelefoneContato"));
-                contato.setEmailContato(result.getString("EmailContato"));
-                contato.setDataNascimento(result.getString("DataNasc"));
-                contato.setAdicionadoEm(result.getString("adicionadoEm"));
+                contato.setNomeContato(result.getString("ContatoNome"));
+                contato.setTelefoneContato(result.getString("ContatoTelefone"));
+                contato.setCelularContato(result.getString("ContatoCelular"));
+                contato.setEmailContato(result.getString("ContatoEmail"));
+                contato.setDataNascimento(result.getString("ContatoNascimento"));
+                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
 
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
@@ -260,7 +266,7 @@ public class DaoContato {
             throws SQLException, Exception {
         //Monta a string de listagem de contatos no banco, considerando
         //apenas a coluna de ativação de contatos ("enabled")
-        String sql = "SELECT * FROM agenda WHERE contatoEnabled = 'true'";
+        String sql = "SELECT * FROM Contato WHERE ContatoEnabled = 'true'";
 
         //Lista de contatos de resultado
         List<Contato> listaContatos = null;
@@ -289,12 +295,12 @@ public class DaoContato {
                 //Cria uma instância de Contatos e popula com os valores do BD
                 Contato contato = new Contato();
                 contato.setIdContato(result.getInt("IdContato"));
-                contato.setNomeContato(result.getString("NomeContato"));
-                contato.setTelefoneContato(result.getString("TelefoneContato"));
-                contato.setEmailContato(result.getString("EmailContato"));
-                contato.setDataNascimento(result.getString("DataNascimento"));
-                contato.setAdicionadoEm(result.getString("AdicionadoEm"));
-
+                contato.setNomeContato(result.getString("ContatoNome"));
+                contato.setTelefoneContato(result.getString("ContatoTelefone"));
+                contato.setCelularContato(result.getString("ContatoCelular"));
+                contato.setEmailContato(result.getString("ContatoEmail"));
+                contato.setDataNascimento(result.getString("ContatoNascimento"));
+                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
             }
@@ -311,91 +317,6 @@ public class DaoContato {
         return listaContatos;
     }
 
-    public static List<Contato> executarConsulta(String sql) throws
-            AgendaException, SQLException, Exception {
-        //Lista de produtos de resultado
-        List<Contato> listaContatos = null;
-        //Conexão para abertura e fechamento
-        Connection connection = null;
-        //Statement para obtenção através da conexão, execução de
-        //comandos SQL e fechamentos
-        Statement statement = null;
-        //Armazenará os resultados do banco de dados
-        ResultSet result = null;
-        try {
-            //Abre uma conexão com o banco de dados
-            connection = Conexao.getConnection();
-            //Cria um statement para execução de instruções SQL
-            statement = connection.createStatement();
-            //Exibe no console o que será executado no banco de dados
-            System.out.println("Executando CONSULTA SQL: " + sql);
-            //Executa a consulta SQL no banco de dados
-            result = statement.executeQuery(sql);
-            //Itera por cada item do resultado
-            while (result.next()) {
-                //Se a lista não foi inicializada, a inicializa
-                if (listaContatos == null) {
-                    listaContatos = new ArrayList<Contato>();
-                }
 
-                Contato contato = new Contato();
-                contato.setIdContato(result.getInt("IdContato"));
-                contato.setNomeContato(result.getString("NomeContato"));
-                contato.setTelefoneContato(result.getString("TelefoneContato"));
-                contato.setEmailContato(result.getString("EmailContato"));
-                contato.setDataNascimento(result.getString("DataNascimento"));
-                contato.setAdicionadoEm(result.getString("AdicionadoEm"));
-
-                listaContatos.add(contato);
-            }
-        } finally {
-
-            if (result != null && !result.isClosed()) {
-                result.close();
-            }
-
-            if (statement != null && !statement.isClosed()) {
-                statement.close();
-            }
-            //S
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        }
-
-        return listaContatos;
-    }
-
-    //Lista todos os produtos da tabela quartos
-    public static List<Contato> listar()
-            throws SQLException, Exception {
-        //Monta a string de listagem de produtos no banco, considerando
-        //apenas a coluna de ativação de produtos ("enabled")
-        String sql = "SELECT * FROM agenda WHERE contatoEnabled = 'true'";
-
-        //Retorna o resultado da execução da consulta SQL montada
-        return executarConsulta(sql);
-    }
-
-    public static Contato obter(Integer id)
-            throws SQLException, Exception {
-
-        String sql = "SELECT * FROM agenda WHERE contatoId = ? AND "
-                + "contatoEnabled = 'true';";
-        PreparedStatement statement = null;
-        Connection connection = null;
-
-        statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
-
-        List<Contato> listaContatos = (List<Contato>) executarConsulta(sql);
-
-        if (listaContatos != null && listaContatos.size() > 0) {
-
-            return listaContatos.get(0);
-        }
-
-        return null;
-    }
 
 }

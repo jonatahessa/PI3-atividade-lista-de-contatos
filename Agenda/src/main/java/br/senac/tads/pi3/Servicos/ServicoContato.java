@@ -9,6 +9,7 @@ import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.Daos.DaoContato;
 import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,10 +45,18 @@ public class ServicoContato {
 
     public boolean verificarTelefoneContato(String telefoneContato) {
         boolean verificarTelefoneContato = true;
-        if (telefoneContato == null || telefoneContato.equals("    -    ")) {
+        if (telefoneContato.equals("(  )    -    ")) {
             verificarTelefoneContato = false;
         }
         return verificarTelefoneContato;
+    }
+    
+    public boolean verificarCelularContato(String celularContato) {
+        boolean verificarCelularContato = true;
+        if (celularContato.equals("(  )     -    ")) {
+            verificarCelularContato = false;
+        }
+        return verificarCelularContato;
     }
 
     public static void removerContato(int id)
@@ -89,11 +98,11 @@ public class ServicoContato {
         }
     }
     
-    public static Contato obterContato(int id)
+    public static  List<Contato> obterContato(int id)
             throws AgendaException, DataSourceException {
         try {
             //Retorna o produto obtido com o DAO
-            return DaoContato.obter(id);
+            return DaoContato.obterContato(id);
         } catch (Exception e) {
             //Imprime qualquer erro técnico no console e devolve
             //uma exceção e uma mensagem amigável a camada de visão
@@ -127,4 +136,5 @@ public class ServicoContato {
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
+
 }

@@ -11,6 +11,7 @@ import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -56,6 +57,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jButtonAdicionar = new javax.swing.JButton();
         jButtonPesquisar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jLabelTelefone1 = new javax.swing.JLabel();
+        jFormattedTextFieldCelular = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(220, 220, 220));
@@ -72,7 +75,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelTelefone.setText("Telefone");
 
         try {
-            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -119,6 +122,16 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jLabelTelefone1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelTelefone1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTelefone1.setText("Celular");
+
+        try {
+            jFormattedTextFieldCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jDesktop.setLayer(jLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktop.setLayer(jTextFieldNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktop.setLayer(jLabelTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -130,6 +143,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jDesktop.setLayer(jButtonAdicionar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktop.setLayer(jButtonPesquisar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktop.setLayer(jButtonSair, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktop.setLayer(jLabelTelefone1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktop.setLayer(jFormattedTextFieldCelular, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopLayout = new javax.swing.GroupLayout(jDesktop);
         jDesktop.setLayout(jDesktopLayout);
@@ -147,25 +162,30 @@ public class TelaInicial extends javax.swing.JFrame {
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(92, 92, 92))
                     .addGroup(jDesktopLayout.createSequentialGroup()
-                        .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTelefone)
-                            .addComponent(jLabelEmail))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                        .addComponent(jFormattedTextFieldDataDeNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 552, Short.MAX_VALUE))
                     .addGroup(jDesktopLayout.createSequentialGroup()
                         .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jFormattedTextFieldDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelDataDeNascimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(95, 552, Short.MAX_VALUE))))
+                            .addComponent(jLabelEmail)
+                            .addComponent(jLabelDataDeNascimento)
+                            .addGroup(jDesktopLayout.createSequentialGroup()
+                                .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelTelefone)
+                                    .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(105, 105, 105)
+                                .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jFormattedTextFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelTelefone1))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopLayout.createSequentialGroup()
+                        .addComponent(jButtonPesquisar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAdicionar))
+                .addGap(21, 21, 21))
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,24 +195,28 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelTelefone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTelefone)
+                    .addComponent(jLabelTelefone1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabelEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelDataDeNascimento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jFormattedTextFieldDataDeNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 340, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
                 .addComponent(jButtonAdicionar)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonPesquisar))
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,7 +249,8 @@ public class TelaInicial extends javax.swing.JFrame {
         contato.setEmailContato(jTextFieldEmail.getText());
         contato.setDataNascimento(jFormattedTextFieldDataDeNascimento.getText());
         contato.setTelefoneContato(jFormattedTextFieldTelefone.getText());
-        contato.setAdicionadoEm(now.toString());
+        contato.setCelularContato(jFormattedTextFieldCelular.getText());
+
 
         ServicoContato servicoContato = new ServicoContato();
 
@@ -233,6 +258,7 @@ public class TelaInicial extends javax.swing.JFrame {
         boolean emailContato = servicoContato.verificarEmailContato(contato.getEmailContato());
         boolean dataNascimento = servicoContato.verificarDataNascimento(contato.getDataNascimento());
         boolean telefoneContato = servicoContato.verificarTelefoneContato(contato.getTelefoneContato());
+        boolean celularContato = servicoContato.verificarCelularContato(contato.getCelularContato());
 
         if (nomeContato == false) {
             jTextFieldNome.setBackground(Color.PINK);
@@ -262,9 +288,20 @@ public class TelaInicial extends javax.swing.JFrame {
         } else {
             jFormattedTextFieldTelefone.setBackground(Color.WHITE);
         }
+        if (celularContato == false) {
+            jFormattedTextFieldCelular.setBackground(Color.PINK);
+            erro++;
+
+        } else {
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
+        }
+        
         if (erro == 0) {
             try {
                 ServicoContato.adicionarContato(contato);
+                JOptionPane.showMessageDialog(null, "Contato Adicionado!");
+                
+                
             } catch (AgendaException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DataSourceException ex) {
@@ -274,6 +311,7 @@ public class TelaInicial extends javax.swing.JFrame {
             jTextFieldEmail.setText("");
             jFormattedTextFieldDataDeNascimento.setText("");
             jFormattedTextFieldTelefone.setText("");
+            jFormattedTextFieldCelular.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Verficique os campos destacados", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -346,12 +384,14 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
     public javax.swing.JDesktopPane jDesktop;
+    public javax.swing.JFormattedTextField jFormattedTextFieldCelular;
     public javax.swing.JFormattedTextField jFormattedTextFieldDataDeNascimento;
-    private javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
+    public javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
     private javax.swing.JLabel jLabelDataDeNascimento;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelTelefone;
+    private javax.swing.JLabel jLabelTelefone1;
     public javax.swing.JTextField jTextFieldEmail;
     public javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
