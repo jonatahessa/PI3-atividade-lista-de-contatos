@@ -9,7 +9,6 @@ import br.senac.tads.pi3.Classes.Contato;
 import br.senac.tads.pi3.Daos.DaoContato;
 import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
-import java.util.Date;
 import java.util.List;
 
 /**

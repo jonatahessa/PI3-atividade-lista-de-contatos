@@ -104,7 +104,7 @@ public class DaoContato {
                 + "ContatoTelefone = ?, "
                 + "ContatoCelular = ?, "
                 + "ContatoEmail = ?, "
-                + "ContatoNascimento = ?, "
+                + "ContatoNascimento = ? "
                 + "WHERE IdContato = ?;";
 
         //Conexão para abertura e fechamento
@@ -123,7 +123,7 @@ public class DaoContato {
             statement.setString(3, contato.getCelularContato());
             statement.setString(4, contato.getEmailContato());
             statement.setString(5, contato.getDataNascimento());
-            statement.setString(6, "" + id);
+            statement.setInt(6, id);
 
             //Exibe no console o que será executado no banco de dados
             System.out.println("Executando COMANDO SQL: " + sql);

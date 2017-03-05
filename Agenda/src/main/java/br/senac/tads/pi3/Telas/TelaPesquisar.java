@@ -25,6 +25,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
     
     TelaEditar telaEditar = null;
     TelaInicial telaInicial = null;
+    public static int contatoId = 0;
 
     /**
      * Creates new form NovoJInternalFrame
@@ -33,9 +34,6 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    TelaInicial telaPesquisar = new TelaInicial();
-    public static int alterou = 0;
-    public static int idContato = 0;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,31 +167,41 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        final int row = jTableAgenda.getSelectedRow();
-        Contato contato = null;
+        try {
 
-        if (row >= 0) {
-            Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
-            try {
+            final int row = jTableAgenda.getSelectedRow();
+
+            if (row >= 0) {
+
+                Integer id = (Integer) jTableAgenda.getValueAt(row, 0);
                 List<Contato> resultado = ServicoContato.obterContato(id);
-
-            } catch (AgendaException ex) {
-                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DataSourceException ex) {
-                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                
+                for (Contato contato : resultado) {
+                    if (contato.getIdContato() == id){   
+                        if (telaEditar == null || !telaEditar.isDisplayable()) {
+                            telaEditar = new TelaEditar();
+                            telaEditar.textNome.setText(contato.getNomeContato());
+                            telaEditar.textCelular.setText(contato.getCelularContato());
+                            telaEditar.textEmail.setText(contato.getEmailContato());
+                            telaEditar.textNascimento.setText(contato.getDataNascimento());
+                            telaEditar.textTelefone.setText(contato.getTelefoneContato());
+                            contatoId = contato.getIdContato();
+                            this.getParent().add(telaEditar);              
+                            telaEditar.toFront();
+                            telaEditar.setVisible(true);
+                            break;
+                        }
+                    }
+                }
             }
-            TelaEditar.contato = contato;
-            TelaEditar.id = id;
-            if (telaEditar == null || !telaEditar.isDisplayable()) {
-                telaEditar = new TelaEditar();
-                telaInicial.jDesktop.add(telaEditar);
-                this.openFrameInCenter(telaEditar);
-            }
-
-            telaEditar.toFront();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione a movimentação a ser editada!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            //Se ocorrer algum erro técnico, mostra-o no console,
+            //mas esconde-o do usuário
+            e.printStackTrace();
+            //Exibe uma mensagem de erro genérica ao usuário
+            JOptionPane.showMessageDialog(rootPane, "Não é possível "
+                + "exibir os detalhes deste cliente.",
+                "Erro ao abrir detalhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
@@ -304,7 +312,8 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         jif.setLocation(width, height);
         jif.setVisible(true);
     }
-
+    
+    public javax.swing.JDesktopPane jDesktop;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFechar;

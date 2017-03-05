@@ -11,9 +11,6 @@ import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -241,8 +238,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         int erro = 0;
-        LocalDateTime now = LocalDateTime.now();
-
         Contato contato = new Contato();
 
         contato.setNomeContato(jTextFieldNome.getText());
