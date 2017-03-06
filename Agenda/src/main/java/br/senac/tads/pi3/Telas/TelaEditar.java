@@ -40,75 +40,75 @@ public class TelaEditar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        textNome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        textTelefone = new javax.swing.JFormattedTextField();
-        textEmail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        textNascimento = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        textCelular = new javax.swing.JFormattedTextField();
+        jLabelNome = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabelTelefone = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jFormattedTextFieldTelefone = new javax.swing.JFormattedTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jLabelDataNasc = new javax.swing.JLabel();
+        jFormattedTextFieldDataNasc = new javax.swing.JFormattedTextField();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jLabelCelular = new javax.swing.JLabel();
+        jFormattedTextFieldCelular = new javax.swing.JFormattedTextField();
 
         setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(102, 102, 102))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Nome");
+        jLabelNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelNome.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelNome.setText("Nome");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Telefone");
+        jLabelTelefone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelTelefone.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTelefone.setText("Telefone");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("E-mail");
+        jLabelEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelEmail.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelEmail.setText("E-mail");
 
         try {
-            textTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+            jFormattedTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("Data de Nascimento");
+        jLabelDataNasc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelDataNasc.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelDataNasc.setText("Data de Nascimento");
 
         try {
-            textNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonCancelar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 102, 102));
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonSalvar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Celular");
+        jLabelCelular.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelCelular.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelCelular.setText("Celular");
 
         try {
-            textCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            jFormattedTextFieldCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -119,63 +119,63 @@ public class TelaEditar extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 142, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1))
+                .addComponent(jButtonCancelar))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textNome)
-                            .addComponent(textEmail)
+                            .addComponent(jTextFieldNome)
+                            .addComponent(jTextFieldEmail)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
+                                    .addComponent(jLabelNome)
+                                    .addComponent(jLabelEmail)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(textNascimento, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(jFormattedTextFieldDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelDataNasc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelTelefone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
+                        .addComponent(jLabelCelular)
                         .addGap(90, 90, 90))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabelTelefone)
+                    .addComponent(jLabelCelular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(jLabelEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(jLabelDataNasc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jFormattedTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonSalvar)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,15 +192,15 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         int erro = 0;
         Contato contato = new Contato();
 
-        contato.setNomeContato(textNome.getText());
-        contato.setEmailContato(textEmail.getText());
-        contato.setDataNascimento(textNascimento.getText());
-        contato.setTelefoneContato(textTelefone.getText());
-        contato.setCelularContato(textCelular.getText());
+        contato.setNomeContato(jTextFieldNome.getText());
+        contato.setEmailContato(jTextFieldEmail.getText());
+        contato.setDataNascimento(jFormattedTextFieldDataNasc.getText());
+        contato.setTelefoneContato(jFormattedTextFieldTelefone.getText());
+        contato.setCelularContato(jFormattedTextFieldCelular.getText());
 
 
         ServicoContato servicoContato = new ServicoContato();
@@ -212,39 +212,42 @@ public class TelaEditar extends javax.swing.JInternalFrame {
         boolean celularContato = servicoContato.verificarCelularContato(contato.getCelularContato());
 
         if (nomeContato == false) {
-            textNome.setBackground(Color.PINK);
+            jTextFieldNome.setBackground(Color.PINK);
             erro++;
 
         } else {
-            textNome.setBackground(Color.WHITE);
+            jTextFieldNome.setBackground(Color.WHITE);
         }
         if (emailContato == false) {
-            textEmail.setBackground(Color.PINK);
+            jTextFieldEmail.setBackground(Color.PINK);
             erro++;
 
         } else {
-            textEmail.setBackground(Color.WHITE);
+            jTextFieldEmail.setBackground(Color.WHITE);
         }
         if (dataNascimento == false) {
-            textNascimento.setBackground(Color.PINK);
+            jFormattedTextFieldDataNasc.setBackground(Color.PINK);
             erro++;
 
         } else {
-            textNascimento.setBackground(Color.WHITE);
+            jFormattedTextFieldDataNasc.setBackground(Color.WHITE);
         }
-        if (telefoneContato == false) {
-            textTelefone.setBackground(Color.PINK);
+        if (telefoneContato == false && celularContato == false) {
+            jFormattedTextFieldTelefone.setBackground(Color.PINK);
+            jFormattedTextFieldCelular.setBackground(Color.PINK);
             erro++;
 
-        } else {
-            textTelefone.setBackground(Color.WHITE);
-        }
-        if (celularContato == false) {
-            textCelular.setBackground(Color.PINK);
-            erro++;
-
-        } else {
-            textCelular.setBackground(Color.WHITE);
+        } else if (telefoneContato == true && celularContato == false) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
+            
+        } else if (telefoneContato == false && celularContato == true) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
+            
+        }else if (telefoneContato == true && celularContato == true) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
         }
         
         if (erro == 0) {
@@ -265,29 +268,29 @@ public class TelaEditar extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Verficique os campos destacados", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         int dialogResult = JOptionPane.showInternalConfirmDialog(this, "Deseja realmente cancelar?");
         if (dialogResult == 0) {
             this.dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSalvar;
+    public javax.swing.JFormattedTextField jFormattedTextFieldCelular;
+    public javax.swing.JFormattedTextField jFormattedTextFieldDataNasc;
+    public javax.swing.JFormattedTextField jFormattedTextFieldTelefone;
+    private javax.swing.JLabel jLabelCelular;
+    private javax.swing.JLabel jLabelDataNasc;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelTelefone;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JFormattedTextField textCelular;
-    public javax.swing.JTextField textEmail;
-    public javax.swing.JFormattedTextField textNascimento;
-    public javax.swing.JTextField textNome;
-    public javax.swing.JFormattedTextField textTelefone;
+    public javax.swing.JTextField jTextFieldEmail;
+    public javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 }

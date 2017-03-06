@@ -181,11 +181,11 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
                     if (contato.getIdContato() == id){   
                         if (telaEditar == null || !telaEditar.isDisplayable()) {
                             telaEditar = new TelaEditar();
-                            telaEditar.textNome.setText(contato.getNomeContato());
-                            telaEditar.textCelular.setText(contato.getCelularContato());
-                            telaEditar.textEmail.setText(contato.getEmailContato());
-                            telaEditar.textNascimento.setText(contato.getDataNascimento());
-                            telaEditar.textTelefone.setText(contato.getTelefoneContato());
+                            telaEditar.jTextFieldNome.setText(contato.getNomeContato());
+                            telaEditar.jFormattedTextFieldCelular.setText(contato.getCelularContato());
+                            telaEditar.jTextFieldEmail.setText(contato.getEmailContato());
+                            telaEditar.jFormattedTextFieldDataNasc.setText(contato.getDataNascimento());
+                            telaEditar.jFormattedTextFieldTelefone.setText(contato.getTelefoneContato());
                             contatoId = contato.getIdContato();
                             this.getParent().add(telaEditar);              
                             telaEditar.toFront();
