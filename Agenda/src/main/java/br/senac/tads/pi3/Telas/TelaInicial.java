@@ -11,7 +11,8 @@ import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -23,9 +24,8 @@ import javax.swing.JOptionPane;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
-    TelaPesquisar telaPesquisar = null; 
-    
-    
+    TelaPesquisar telaPesquisar = null;
+
     /**
      * Creates new form NewJFrame
      */
@@ -239,7 +239,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         int erro = 0;
         Contato contato = new Contato();
-
+        
         contato.setNomeContato(jTextFieldNome.getText());
         contato.setEmailContato(jTextFieldEmail.getText());
         contato.setDataNascimento(jFormattedTextFieldDataDeNascimento.getText());
@@ -276,27 +276,29 @@ public class TelaInicial extends javax.swing.JFrame {
         } else {
             jFormattedTextFieldDataDeNascimento.setBackground(Color.WHITE);
         }
-        if (telefoneContato == false) {
+        if (telefoneContato == false && celularContato == false) {
             jFormattedTextFieldTelefone.setBackground(Color.PINK);
-            erro++;
-
-        } else {
-            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
-        }
-        if (celularContato == false) {
             jFormattedTextFieldCelular.setBackground(Color.PINK);
             erro++;
 
-        } else {
+        } else if (telefoneContato == true && celularContato == false) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
+            
+        } else if (telefoneContato == false && celularContato == true) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
+            jFormattedTextFieldCelular.setBackground(Color.WHITE);
+            
+        }else if (telefoneContato == true && celularContato == true) {
+            jFormattedTextFieldTelefone.setBackground(Color.WHITE);
             jFormattedTextFieldCelular.setBackground(Color.WHITE);
         }
-        
+
         if (erro == 0) {
             try {
                 ServicoContato.adicionarContato(contato);
                 JOptionPane.showMessageDialog(null, "Contato Adicionado!");
-                
-                
+
             } catch (AgendaException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DataSourceException ex) {
@@ -310,7 +312,7 @@ public class TelaInicial extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Verficique os campos destacados", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-       
+
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed

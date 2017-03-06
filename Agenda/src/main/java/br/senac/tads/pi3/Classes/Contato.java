@@ -1,6 +1,7 @@
 package br.senac.tads.pi3.Classes;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -14,7 +15,7 @@ public class Contato {
     private String celularContato;
     private String emailContato;
     private String dataNascimento;
-    private Date adicionadoEm;
+    private String adicionadoEm;
 
     public int getIdContato() {
         return idContato;
@@ -64,15 +65,12 @@ public class Contato {
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDate() {
-        return adicionadoEm;
-    }
-
-    public void setAdicionadoEm(Date adicionadoEm) {
+    public void setAdicionadoEm(String adicionadoEm) {
         this.adicionadoEm = adicionadoEm;
     }
 
-    public Date getAdicionadoEm(){
+    public String getAdicionadoEm(){
         return adicionadoEm;
     }
+
 }

@@ -1,7 +1,6 @@
 package br.senac.tads.pi3.Daos;
 
 import br.senac.tads.pi3.Classes.Contato;
-import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,18 +8,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DaoContato {
+    
+    
 
     public static void inserir(Contato contato)
             throws SQLException, Exception {
         //Monta a string de inserção de um cliente no BD,
         //utilizando os dados do clientes passados como parâmetro
         String sql = "INSERT INTO Contato (ContatoNome, ContatoEmail, "
-                + "ContatoTelefone, ContatoCelular, ContatoNascimento, ContatoEnabled, ContatoAdicionadoEm) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP());";
+                + "ContatoTelefone, ContatoCelular, ContatoNascimento, ContatoEnabled, ContatoAdicionadoEm) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -183,7 +183,7 @@ public class DaoContato {
                 contato.setCelularContato(result.getString("ContatoCelular"));
                 contato.setEmailContato(result.getString("ContatoEmail"));
                 contato.setDataNascimento(result.getString("ContatoNascimento"));
-                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
+                contato.setAdicionadoEm(result.getString("ContatoAdicionadoEm"));
 
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
@@ -243,7 +243,7 @@ public class DaoContato {
                 contato.setCelularContato(result.getString("ContatoCelular"));
                 contato.setEmailContato(result.getString("ContatoEmail"));
                 contato.setDataNascimento(result.getString("ContatoNascimento"));
-                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
+                contato.setAdicionadoEm(result.getString("ContatoAdicionadoEm"));
 
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
@@ -300,7 +300,7 @@ public class DaoContato {
                 contato.setCelularContato(result.getString("ContatoCelular"));
                 contato.setEmailContato(result.getString("ContatoEmail"));
                 contato.setDataNascimento(result.getString("ContatoNascimento"));
-                contato.setAdicionadoEm(result.getDate("ContatoAdicionadoEm"));
+                contato.setAdicionadoEm(result.getString("ContatoAdicionadoEm"));
                 //Adiciona a instância na lista
                 listaContatos.add(contato);
             }

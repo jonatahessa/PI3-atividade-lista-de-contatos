@@ -10,6 +10,7 @@ import br.senac.tads.pi3.Exceptions.AgendaException;
 import br.senac.tads.pi3.Exceptions.DataSourceException;
 import br.senac.tads.pi3.Servicos.ServicoContato;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -195,9 +196,6 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            //Se ocorrer algum erro técnico, mostra-o no console,
-            //mas esconde-o do usuário
-            e.printStackTrace();
             //Exibe uma mensagem de erro genérica ao usuário
             JOptionPane.showMessageDialog(rootPane, "Não é possível "
                 + "exibir os detalhes deste cliente.",
@@ -231,7 +229,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         List<Contato> resultado = null;
         
         //Retornar todos os Contatos
-        if (jTextPesquisa.getText().toString().equals("")) {
+        if (jTextPesquisa.getText().equals("")) {
             try {
                 resultado = ServicoContato.retornarTodos();
                 DefaultTableModel model = (DefaultTableModel) jTableAgenda.getModel();
@@ -269,7 +267,7 @@ public class TelaPesquisar extends javax.swing.JInternalFrame {
         //Retornar os contatos pesquisados    
         } else {
             try {
-                resultado = ServicoContato.pesquisarContato(jTextPesquisa.getText().toString());
+                resultado = ServicoContato.pesquisarContato(jTextPesquisa.getText());
             } catch (AgendaException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao pesquisar contato no Banco de Dados!", "Erro", JOptionPane.ERROR_MESSAGE);
             } catch (DataSourceException ex) {
