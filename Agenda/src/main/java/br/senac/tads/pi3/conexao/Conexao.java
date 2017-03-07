@@ -30,11 +30,11 @@ public class Conexao {
             Class.forName(driverName);
             
             //Configurando a conexao com o banco de dados
-            String serveName = "127.0.0.1:3306"; // Caminho do servidor do BD
-            String mydatabase = "Agenda"; // Nome do banco de dados
+            String serveName = "sql10.freemysqlhosting.net:3306"; // Caminho do servidor do BD
+            String mydatabase = "sql10162074"; // Nome do banco de dados
             String url = "jdbc:mysql://" + serveName + "/" + mydatabase;
-            String username = "root"; // Nome de usuario
-            String password = "root"; // Senha de acesso
+            String username = "sql10162074"; // Nome de usuario
+            String password = "7amIiE1uE1"; // Senha de acesso
             connection = DriverManager.getConnection(url, username, password);
             
             //Teste de conexao
